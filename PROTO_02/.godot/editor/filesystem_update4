@@ -1,3 +1,12 @@
 res://main.tscn
+<<<<<<< HEAD
 res://player.gd
 res://player.tscn
+=======
+res://windsfx.gd
+res://main_menu.tscn
+res://campfire.tscn
+res://flame.gdshader
+res://bar.tres
+res://campfire.gd
+>>>>>>> ab5277c43f9bf7bb91428e71f887cc2baaad470e
