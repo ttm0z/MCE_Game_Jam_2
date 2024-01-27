@@ -1,2 +1,7 @@
 res://main.tscn
 res://windsfx.gd
+res://main_menu.tscn
+res://campfire.tscn
+res://flame.gdshader
+res://bar.tres
+res://campfire.gd

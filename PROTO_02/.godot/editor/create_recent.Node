@@ -1,2 +1,7 @@
+ProgressBar
+Control
+GPUParticles2D
+CanvasModulate
+CanvasLayer
 AudioStreamPlayer2D
 Node2D

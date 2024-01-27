@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dq1gfha6g8pns"]
+[gd_scene load_steps=15 format=3 uid="uid://dq1gfha6g8pns"]
 
 [ext_resource type="Texture2D" uid="uid://wdu3hxdrsfw" path="res://icon.svg" id="1_dcyuw"]
 [ext_resource type="PackedScene" uid="uid://cbboekyrsaiyk" path="res://tree.tscn" id="2_iybm4"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://windsfx.gd" id="6_60vno"]
 [ext_resource type="AudioStream" uid="uid://c2piqtv0o27ok" path="res://assets/sfx/fire-crackle.ogg" id="7_mearv"]
 [ext_resource type="AudioStream" uid="uid://csxjp4fvkcxdg" path="res://assets/sfx/windstorm.wav" id="8_wrvas"]
+[ext_resource type="Theme" uid="uid://b8eroubhtn8va" path="res://bar.tres" id="9_dcawc"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_cukuf"]
 
@@ -83,7 +84,23 @@ texture = ExtResource("1_dcyuw")
 [sub_resource type="TileSet" id="TileSet_38drt"]
 sources/0 = SubResource("TileSetAtlasSource_0rbtn")
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3638l"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_82mm2"]
+bg_color = Color(1, 0.454902, 0, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.8, 0.8, 0.8, 0)
+
+[node name="root" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
 z_index = -4096
@@ -115,10 +132,13 @@ position = Vector2(398, 261)
 [node name="tree6" parent="." instance=ExtResource("2_iybm4")]
 position = Vector2(551, 87)
 
-[node name="campfire" parent="." instance=ExtResource("4_fpqq2")]
+[node name="campfire" parent="." node_paths=PackedStringArray("progressBar") instance=ExtResource("4_fpqq2")]
 z_index = 28
 position = Vector2(530, 283)
 scale = Vector2(0.9, 0.9)
+progressBar = NodePath("../Control/ProgressBar")
+burnRate = 1.0
+startFuel = 20.0
 
 [node name="camera" type="Camera2D" parent="."]
 position = Vector2(572, 318)
@@ -140,3 +160,25 @@ stream = ExtResource("7_mearv")
 
 [node name="wind" type="AudioStreamPlayer2D" parent="SFX"]
 stream = ExtResource("8_wrvas")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+z_index = -6
+color = Color(0.576471, 0.537255, 0.517647, 1)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 476.0
+offset_bottom = 40.0
+
+[node name="ProgressBar" type="ProgressBar" parent="Control"]
+layout_mode = 0
+offset_right = 616.0
+offset_bottom = 44.0
+theme = ExtResource("9_dcawc")
+theme_override_styles/background = SubResource("StyleBoxFlat_3638l")
+theme_override_styles/fill = SubResource("StyleBoxFlat_82mm2")
+value = 29.26
+show_percentage = false
