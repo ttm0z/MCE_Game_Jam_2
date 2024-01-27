@@ -1,10 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://dq1gfha6g8pns"]
+[gd_scene load_steps=12 format=3 uid="uid://dq1gfha6g8pns"]
 
 [ext_resource type="Texture2D" uid="uid://wdu3hxdrsfw" path="res://icon.svg" id="1_dcyuw"]
 [ext_resource type="PackedScene" uid="uid://cbboekyrsaiyk" path="res://tree.tscn" id="2_iybm4"]
 [ext_resource type="PackedScene" uid="uid://bwolsf3lffylp" path="res://campfire_new.tscn" id="4_fpqq2"]
 [ext_resource type="PackedScene" uid="uid://dbfpckfg0kl35" path="res://player.tscn" id="4_rvyqj"]
 [ext_resource type="Script" path="res://camera.gd" id="5_v3cst"]
+[ext_resource type="Script" path="res://windsfx.gd" id="6_60vno"]
+[ext_resource type="AudioStream" uid="uid://c2piqtv0o27ok" path="res://assets/sfx/fire-crackle.ogg" id="7_mearv"]
+[ext_resource type="AudioStream" uid="uid://csxjp4fvkcxdg" path="res://assets/sfx/windstorm.wav" id="8_wrvas"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_cukuf"]
 
@@ -120,3 +123,20 @@ scale = Vector2(0.9, 0.9)
 [node name="camera" type="Camera2D" parent="."]
 position = Vector2(572, 318)
 script = ExtResource("5_v3cst")
+
+[node name="SFX" type="Node2D" parent="." node_paths=PackedStringArray("player", "fire", "campfireSFX", "windSFX")]
+script = ExtResource("6_60vno")
+player = NodePath("../player")
+fire = NodePath("../campfire")
+campfireSFX = NodePath("fire")
+windSFX = NodePath("wind")
+windDist = 200
+fireMaxVol = 15
+windMinVol = -4
+fireMinVol = 8
+
+[node name="fire" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource("7_mearv")
+
+[node name="wind" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource("8_wrvas")
